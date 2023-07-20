@@ -349,16 +349,19 @@ public class PracticeService {
 
 			// 중복 확인
 			for (int j = 0; j < i; j++) {
+				
+				System.out.println("\ni값" + strChar[i]);
+				System.out.println("j값" + strChar[j]);
+				
 
 				if (strChar[i] == strChar[j]) {
 
-					break;
+					continue;
 
 				}
 			}
 
 			System.out.print(strChar[i] + ", ");
-
 			count++;
 
 		}
