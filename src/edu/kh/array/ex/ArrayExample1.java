@@ -310,7 +310,7 @@ public class ArrayExample1 {
 		System.out.print("문자열 입력 : ");
 		String str = sc.nextLine();
 
-		int count = 0;
+		int count = 0; // 같은 글자 개수를 세기 위한 변수
 
 		boolean flag = false;
 
@@ -318,9 +318,11 @@ public class ArrayExample1 {
 
 		for (int i = 0; i < str.length(); i++) {
 
-			charstr[i] = str.charAt(i);
+			charstr[i] = str.charAt(i);   // 띄어쓰기도 한 칸으로 받음.
 
 		}
+		
+//		System.out.println(Arrays.toString(charstr)); // 배열 값 확인 
 
 		System.out.print("검색할 문자 : ");
 		String find = sc.next();
@@ -336,11 +338,21 @@ public class ArrayExample1 {
 		}
 
 		if (flag) {
-			System.out.printf("찾은 문자 %s는 %d개 있습니다.", find, count);
+			System.out.printf("찾았던 문자 \'%s\'는 %d개 있습니다.", find, count);
 
 		} else {
 			System.out.println("존재하지 않습니다.");
 		}
+		
+		/* count로 if문 처리
+		 * 
+		 * if(count>0){
+		 * 		System.out.printf("찾았던 문자 \'%s\'는 %d개 있습니다.", find, count);
+		 * } else {
+		 * 		System.out.println("존재하지 않습니다.");
+		 * }
+		 * 
+		 */
 	}
 
 }
