@@ -193,50 +193,176 @@ public class PracticeService {
 
 	}
 
-	public void practice8() {
-		
-		// 1. 3이상인 홀수를 입력 받음. (== 배열의 길이)  (3미만 or 짝수는 다시 입력하라고 하고 다시 정수 받도록 함.)
-		// 2. 중간 값까지 1씩 오름차순 
+	public void practice8() { // 다시 돌아가는 거 어케함. ?
+
+		// 1. 3이상인 홀수를 입력 받음. (== 배열의 길이) (3미만 or 짝수는 다시 입력하라고 하고 다시 정수 받도록 함.)
+		// 2. 중간 값까지 1씩 오름차순
 		// 3. 중간 이후 값은 1씩 내림차순
 
 		System.out.print("정수 :");
 
 		int num = sc.nextInt();
-		int [] arr = new int[num];
-		
-		if( num < 3 || num %2 == 0) {
+		int[] arr = new int[num];
+
+		if (num < 3 || num % 2 == 0) {
 			System.out.println("다시 입력하세요.");
-			
-		}else {
-			
-			int half = num /2 +1 ; // 홀수면 , 중간값의 + 1  5/2 = 2 +1 ( 3 까지) 
-			
-			for( int i = 0; i < half; i++) {
-				
-				arr[i] = i+1;
+
+		} else {
+
+			int half = num / 2 + 1; // 홀수면 , 중간값의 + 1 5/2 = 2 +1 ( 3 까지)
+
+			System.err.println(half);
+			for (int i = 0; i < half; i++) {
+
+				arr[i] = i + 1;
 
 			}
-			
-			for( int j = half-1; j < num ; j++) {
-				
-				arr[j] = j -1;				
+
+			for (int j = half; j < num; j++) {
+
+				arr[j] = (num - j);
 			}
-		
+
 			System.out.println(Arrays.toString(arr));
-			
+
 		}
-		
-		
-		
-		
-		
-		
-		
-		
+
 	}
-	
-	
-	
-	
-	
+
+	public void practice9() {
+
+		int[] arr = new int[10];
+
+		for (int i = 0; i < arr.length; i++) {
+
+			int random = (int) (Math.random() * 10 + 1);
+
+			arr[i] = random;
+
+		}
+
+		System.out.print("발생한 난수 : ");
+
+		for (int j = 0; j < arr.length; j++) {
+
+			System.out.print(arr[j] + " ");
+
+		}
+
+	}
+
+	public void practice10() {
+
+		int[] arr = new int[10];
+
+		for (int i = 0; i < arr.length; i++) {
+
+			int random = (int) (Math.random() * 10 + 1);
+
+			arr[i] = random;
+
+		}
+
+		int max = arr[0];
+		int min = arr[0];
+
+		System.out.print("발생한 난수 : ");
+
+		for (int j = 0; j < arr.length; j++) {
+
+			System.out.print(arr[j] + " ");
+
+			if (max < arr[j]) {
+
+				max = arr[j];
+			}
+			if (min > arr[j]) {
+
+				min = arr[j];
+			}
+		}
+
+		System.out.println("\n최대값 : " + max);
+		System.out.println("최소값 : " + min);
+
+	}
+
+	public void practice11() {
+
+		int[] arr = new int[10];
+
+		for (int i = 0; i < arr.length; i++) {
+
+			int random = (int) (Math.random() * 10 + 1);
+
+			arr[i] = random;
+
+			// 중복 확인
+			for (int j = 0; j < i; j++) {
+
+				if (arr[j] == arr[i]) {
+
+					i--;
+
+					break;
+				} else {
+
+					arr[i] = random;
+				}
+
+			}
+
+		}
+
+		for (int a = 0; a < arr.length; a++) {
+
+			System.out.print(arr[a] + " ");
+
+		}
+//		System.out.print(Arrays.toString(arr));
+
+	}
+
+	public void practice12() { // 로또
+
+	}
+
+	public void practice13() {
+
+		// 1. 문자열을 입력
+		// 2. 문자열을 char형태로 하여 strChar 배열값에 대입
+		// 3. 새로 가져오는 인덱스 값이랑 이전에 있는 인덱스 값이 같니?
+		// 4. 같으면 그냥 지금 있는거 통과 시켜
+
+		System.out.print("문자열 : ");
+		String str = sc.next();
+
+		char[] strChar = new char[str.length()];
+
+		int count = 0;
+
+		System.out.print("문자열에 있는 문자 : ");
+
+		for (int i = 0; i < str.length(); i++) {
+
+			strChar[i] = str.charAt(i);
+
+			// 중복 확인
+			for (int j = 0; j < i; j++) {
+
+				if (strChar[i] == strChar[j]) {
+
+					break;
+
+				}
+			}
+
+			System.out.print(strChar[i] + ", ");
+
+			count++;
+
+		}
+		System.out.println("\n문자 개수 : " + count);
+	}
+
 }
