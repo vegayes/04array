@@ -1,5 +1,6 @@
 package edu.kh.array.practice.service;
 
+import java.nio.file.spi.FileSystemProvider;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -169,62 +170,72 @@ public class PracticeService {
 
 	}
 
-	public void practice7() { // 디테일 추가시키기 ( 자리수 이상나오면 다시 하라고 if문
+	public void practice7() { 
 
 		System.out.print("주민등록번호 (-포함) : ");
 		String RRN = sc.next();
+		
+		if(RRN.length() == 14) {
 
-		char[] arr = new char[RRN.length()];
-
-		for (int i = 0; i < RRN.length(); i++) {
-
-			arr[i] = RRN.charAt(i);
-
-		}
-
-		for (int j = 0; j < arr.length; j++) {
-			if (j > 7) {
-				System.out.print("*");
-			} else {
-				System.out.print(arr[j]);
+			char[] arr = new char[RRN.length()];
+		
+			for (int i = 0; i < RRN.length(); i++) {
+		
+				arr[i] = RRN.charAt(i);
+		
 			}
-
+		
+			for (int j = 0; j < arr.length; j++) {
+				if (j > 7) {
+					System.out.print("*");
+				} else {
+					System.out.print(arr[j]);
+				}
+		
+			}
+		}else {
+			
+			System.out.println("다시 입력해주세요! (6자리-7자리)");
+			
 		}
 
 	}
 
-	public void practice8() { // 다시 돌아가는 거 어케함. ?
+	public void practice8() {
 
 		// 1. 3이상인 홀수를 입력 받음. (== 배열의 길이) (3미만 or 짝수는 다시 입력하라고 하고 다시 정수 받도록 함.)
 		// 2. 중간 값까지 1씩 오름차순
 		// 3. 중간 이후 값은 1씩 내림차순
+		while (true) {
 
-		System.out.print("정수 :");
+			System.out.print("정수 :");
+			int num = sc.nextInt();
+			int[] arr = new int[num];
 
-		int num = sc.nextInt();
-		int[] arr = new int[num];
+			if (num < 3 || num % 2 == 0) {
+				System.out.println("다시 입력하세요.");
 
-		if (num < 3 || num % 2 == 0) {
-			System.out.println("다시 입력하세요.");
+				continue;
 
-		} else {
+			} else {
 
-			int half = num / 2 + 1; // 홀수면 , 중간값의 + 1 5/2 = 2 +1 ( 3 까지)
+				int half = num / 2 + 1; // 홀수면 , 중간값의 + 1 5/2 = 2 +1 ( 3 까지)
 
-			System.err.println(half);
-			for (int i = 0; i < half; i++) {
+				System.out.println(half);
+				for (int i = 0; i < half; i++) {
 
-				arr[i] = i + 1;
+					arr[i] = i + 1;
 
+				}
+
+				for (int j = half; j < num; j++) {
+
+					arr[j] = (num - j);
+				}
+
+				System.out.println(Arrays.toString(arr));
+				break;
 			}
-
-			for (int j = half; j < num; j++) {
-
-				arr[j] = (num - j);
-			}
-
-			System.out.println(Arrays.toString(arr));
-
 		}
 
 	}
@@ -323,12 +334,38 @@ public class PracticeService {
 
 	}
 
-	public void practice12() { // 로또
+	public void practice12() {
 
+		int[] arr = new int[6];
+
+		for (int i = 0; i < arr.length; i++) {
+
+			int random = (int) (Math.random() * 45 + 1);
+
+			arr[i] = random;
+
+			// 중복확인
+			for (int j = 0; j < i; j++) {
+
+				if (arr[i] == arr[j]) {
+
+					i--;
+					break;
+				}
+
+			}
+
+		}
+
+		Arrays.sort(arr);
+
+		for (int a = 0; a < arr.length; a++) {
+
+			System.out.print(arr[a] + " ");
+		}
 	}
 
 	public void practice13() {
-
 		// 1. 문자열을 입력
 		// 2. 문자열을 char형태로 하여 strChar 배열값에 대입
 		// 3. 새로 가져오는 인덱스 값이랑 이전에 있는 인덱스 값이 같니?
@@ -338,34 +375,114 @@ public class PracticeService {
 		String str = sc.next();
 
 		char[] strChar = new char[str.length()];
+		char[] strClone = new char[str.length()];
 
 		int count = 0;
-
+		
+		for(int i = 0; i < str.length(); i++) {
+			strClone[i] = str.charAt(i);
+		}
+		
 		System.out.print("문자열에 있는 문자 : ");
-
+		
 		for (int i = 0; i < str.length(); i++) {
-
+			
 			strChar[i] = str.charAt(i);
-
-			// 중복 확인
-			for (int j = 0; j < i; j++) {
-				
-				System.out.println("\ni값" + strChar[i]);
-				System.out.println("j값" + strChar[j]);
-				
-
-				if (strChar[i] == strChar[j]) {
-
-					continue;
-
+			
+			for (int j = 0; j <= i; j++) {
+				if(strClone[i] == strChar[j] && j != i) { 
+					break;
+				} else if (i == j) {
+					if( strClone.length-1 == j) {
+						System.out.print(strClone[i]);
+					} else {
+						System.out.print(strClone[i]+", ");
+						
+					}count++;				
 				}
 			}
-
-			System.out.print(strChar[i] + ", ");
-			count++;
-
 		}
-		System.out.println("\n문자 개수 : " + count);
+		
+		System.out.println("\n문자 개수 : "+count);
+		
+		
+		
+		
 	}
 
+	public void practice14() {
+
+		// 1. 배열의 크기 입력 --> 선언 및 할당 O
+		// 2. 배열의 값 :: 사용자 초기화 O
+		// 3. 배열의 값 추가 유무 확인 (==> 한번은 무조건 나옴. 그리고 조건에 따라 다시
+		// 4. 몇개 더 넣고 싶은지 확인 ( => 방 더 만들기 ???????????)
+		// 5. 추가해서 받을 값은 무엇인지
+		// 6. 사용자가 더 입력하지 않게다하면, 배열 전체 값 출력
+
+		System.out.print("배열의 크기를 입력하세요 :");
+		int size = sc.nextInt();
+		sc.nextLine();
+		int count = 0;
+
+		String[] strArr = new String[size];
+
+		for (int i = 0; i < strArr.length; i++) {
+			count++;
+			System.out.printf("%d번째 문자열 :", count);
+
+			strArr[i] = sc.nextLine();
+		}
+		
+		char check;
+		String[] newArr = new String[count];
+
+		do {
+
+			System.out.print("더 값을 입력하시겠습니까?(y/n) :");
+
+			check = sc.next().charAt(0);
+			sc.nextLine();
+
+			if (check == 'y' || check == 'Y') {
+				System.out.print("더 입력하고 싶은 개수 :");
+				int more = sc.nextInt();
+			
+				
+				newArr = new String[count + more];
+				for(int i = 0; i < strArr.length; i++) {
+					newArr[i] = strArr[i];
+				}
+
+				for (int j = 0; j < more; j++) {
+					count++;
+					System.out.printf("%d번째 문자열 :", count);
+
+					newArr[count - 1] = sc.next();
+				}
+			} else if (check == 'n' || check == 'N') {
+
+				System.out.println(Arrays.toString(newArr));
+				break;
+			}
+		} while (check == 'y');
+
+//		char check = sc.next().charAt(0);
+//		
+//		if(check == 'y') {
+//			
+//			System.out.print("더 입력하고 싶은 개수 :");
+//			int more = sc.nextInt();
+//			
+//			for(int j = 0; j < more; j++) {
+//				
+//				System.out.printf("%d번째 문자열 :",strArr.length+j+1);
+//				
+//				strArr[strArr.length+j+1] = sc.next();
+//				
+//			}
+//			
+//			
+//		}
+
+	}
 }
