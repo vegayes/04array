@@ -214,7 +214,7 @@ public class ArrayExample1 {
 
 		// 배열 선언과 동시에 ( 할당 및 ) 초기화
 		char[] arr3 = { 'A', 'B', 'C', 'D', 'E' };
-		// {} (중괄호)는 배열의 리터럴 표기법
+		// {} (중괄호)는 배열의 리터럴(들어가는 값)  표기법
 		// 들어가는 값 만큼 할당됨.
 
 		System.out.println(Arrays.toString(arr3));
@@ -226,7 +226,7 @@ public class ArrayExample1 {
 
 		String[] menu = { "떡볶이", "튀김", "국밥", "서브웨이", "햄버거" };
 
-		System.out.println("오늘 점심 메뉴  : " + menu[(int) (Math.random() * 4)]);
+		System.out.println("오늘 점심 메뉴  : " + menu[(int) (Math.random() * 5)]);
 
 	}
 
